@@ -1,0 +1,37 @@
+#logo {
+    height: 80px !important;
+    top: 38% !important;
+}
+
+@media (max-width: 767px) {
+    #logo {
+        height: 50px !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .swiper-container-autoheight, .swiper-container-autoheight .swiper-slide {
+        height: 162px !important;
+    }
+}
+
+form label {
+    margin-bottom: 8px !important;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    background-color: #941e29 !important;
+    border-color: #941e29 !important;
+}
+
+.my-account h2 {
+    font-size: 18px !important;
+    line-height: 24px !important;
+    color: #343434;
+    font-weight: 900;
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+}
+.my-account label {
+    margin-bottom: 8px;
+}
