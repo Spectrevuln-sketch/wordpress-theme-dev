@@ -1,10 +1,11 @@
 <?php
 
 /**
- *  Page mitra template
+ *  Page contact template
  *
  * @package Ecommerce_theme
  */
+$file_create = \Ecommerce_Theme\Inc\FileCreate::get_instance();
 get_header();
 ?>
 <div id="primary">
@@ -14,7 +15,7 @@ get_header();
       if (have_posts()) :
         while (have_posts()) : the_post();
 
-          get_template_part("template-parts/content", "distributor");
+          get_template_part("template-parts/content", "contact");
 
         endwhile;
       ?>

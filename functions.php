@@ -46,7 +46,7 @@ if (!defined('ECOMMERCE_BUILD_CSS_DIR_PATH')) {
 if (!defined('ECOMMERCE_BUILD_LIB_URI')) {
 	define('ECOMMERCE_BUILD_LIB_URI', untrailingslashit(get_template_directory_uri()) . '/assets/build/library');
 }
-
+error_reporting(E_ALL & E_STRICT);
 require_once ECOMMERCE_DIR_PATH . '/inc/helpers/autoloader.php';
 require_once ECOMMERCE_DIR_PATH . '/inc/helpers/template-tags.php';
 

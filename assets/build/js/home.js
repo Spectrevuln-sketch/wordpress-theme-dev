@@ -3,6 +3,7 @@
     constructor() {
       this.animateCategory();
       this.initiateCarousel();
+      // this.check_article();
     }
 
     initiateCarousel() {
@@ -24,6 +25,16 @@
         $(this).addClass('.animate__bounce');
       })
     }
+
+    // check_article() {
+    //   var addChild = $('.simple-article').html('<p><?= $content1[0]->meta_value; ?></p>');
+    //   var article = $('.simple-article.size-4.grey').html();
+    //   if (article.length > 2) {
+    //     addChild += '<p><?= $content1[0]->meta_value; ?></p>';
+    //   }
+    //   console.log(addChild)
+    // }
+
 
 
 

@@ -11,6 +11,8 @@
 ?>
 
 <div class="entry-content">
+
+
 	<?php
 	if (is_single()) {
 		the_content(

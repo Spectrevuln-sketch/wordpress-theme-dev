@@ -54,6 +54,15 @@ class ECOMMERCE_THEME
 		add_theme_support('post-thumbnails', [
 			'product-category'
 		]);
+		add_theme_support('post-thumbnails', [
+			'banner-image'
+		]);
+		add_theme_support('post-thumbnails', [
+			'content-paragraph'
+		]);
+		add_theme_support('post-thumbnails', [
+			'distributor'
+		]);
 		/**
 		 * Let WordPress manage the document title.
 		 * By adding theme support, we declare that this theme does not use a

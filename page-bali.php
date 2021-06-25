@@ -1,11 +1,17 @@
 <?php
 
 /**
- *  Page mitra template
+ *  Page bali template
  *
  * @package Ecommerce_theme
  */
+$file_create = \Ecommerce_Theme\Inc\FileCreate::get_instance();
 get_header();
+$path_file = ECOMMERCE_DIR_PATH . "/template-parts/content-distributor_list_bali.php";
+if (!file_exists($path_file)) {
+
+  return check_page_by_API("bali", the_ID());
+}
 ?>
 <div id="primary">
   <main id="main" class="site-main mt-5" role="main">
@@ -14,7 +20,7 @@ get_header();
       if (have_posts()) :
         while (have_posts()) : the_post();
 
-          get_template_part("template-parts/content", "distributor");
+          get_template_part("template-parts/content", "distributor_list_bali");
 
         endwhile;
       ?>

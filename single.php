@@ -7,6 +7,7 @@
  */
 
 get_header();
+
 ?>
 
 <div id="primary">
@@ -56,7 +57,6 @@ get_header();
 				<div class="prev-link"><?php previous_post_link(); ?></div>
 				<div class="next-link"><?php next_post_link(); ?></div>
 			</div>
-			<h1 style="background-color: red;">Test</h1>
 			<div class="col-lg-4 col-md-4 col-sm-12">
 				<?php get_sidebar(); ?>
 			</div>

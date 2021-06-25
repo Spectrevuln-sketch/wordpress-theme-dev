@@ -85,8 +85,11 @@ class FileCreate
      */
     $file_create = \Ecommerce_Theme\Inc\FileCreate::get_instance();
     get_header();
-    // $path_file = ECOMMERCE_DIR_PATH . "/template-parts/content-' . $slug_url . '.php";
-      // $file_create->create_file_template(the_ID(), "https://sr12herbalskincare.co.id/distributor/area");
+    $path_file = ECOMMERCE_DIR_PATH . "/template-parts/content-distributor_list_' . $slug_url . '.php";
+    if (!file_exists($path_file)) {
+
+      return check_page_by_API("' . $slug_url . '", the_ID());
+    }
     ?>
     <div id="primary">
       <main id="main" class="site-main mt-5" role="main">
@@ -95,7 +98,7 @@ class FileCreate
           if (have_posts()) :
             while (have_posts()) : the_post();
     
-              get_template_part("template-parts/content", "' . $slug_url . '");
+              get_template_part("template-parts/content", "distributor_list_' . $slug_url . '");
     
             endwhile;
           ?>

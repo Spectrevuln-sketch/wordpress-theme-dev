@@ -7,32 +7,32 @@
  */
 
 /* Query Limit Slider */
-$image_banner = ecommerce_banner('banner-image', 3);
-$jumbotron = ecommerce_banner('banner-image', 1);
+$image_banner = get_name_like('promo-');
+$jumbotron = get_name_like('banner_home');
+$jumbotron2 = get_name_like('banner_image');
 /* End Query Limit Slider */
 ?>
 
 
-
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
-	if (!is_home()) {
+	if (!is_front_page()) {
 	?>
-		<!-- <header class="entry-header">
+		<header class="entry-header">
 			<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-		</header> -->
-		<!-- .entry-header -->
+		</header>
+		<!-- .entry-header-->
 	<?php
 	}
 	?>
 
 	<?php
-	if ($image_banner->have_posts()) :
+	if ($image_banner) :
 	?>
 		<div class="empty-space col-xs-b35 col-md-b70"></div>
 		<div class="slider-home">
 
-			<?php foreach ($image_banner->get_posts() as $banner) : ?>
+			<?php foreach ($image_banner as $banner) : ?>
 				<div class="bg-cover">
 
 					<?php
@@ -44,7 +44,7 @@ $jumbotron = ecommerce_banner('banner-image', 1);
 							'featured-thumbnail',
 							[
 								'sizes' => '(max-width: 350px) 50px, 33px;',
-								'class' => 'd-block bg-cover',
+								'class' => 'd-block',
 								'style' => 'height: 40em; width:100%;',
 
 							]
@@ -58,121 +58,114 @@ $jumbotron = ecommerce_banner('banner-image', 1);
 	<div class="empty-space col-xs-b35 col-md-b70"></div>
 	<div class="empty-space col-xs-b35 col-md-b70"></div>
 	<div class="container">
-		<div class="text-center">
-			<div class="simple-article size-3 grey uppercase col-xs-b5">Kategori Produk</div>
-			<div class="h2">Terbaik dari yang terbaik</div>
-			<div class="title-underline center"><span></span></div>
-		</div>
-	</div>
-	<div class="container">
 		<?php
 		$product_category = ecommerce_get_post_type('product-category');
+		$product_link = ecommerce_get_post_by_slug('page', 'product')->get_posts()[0];
 		if ($product_category->have_posts()) :
 		?>
-			<?php foreach ($product_category->get_posts() as $categories_data) : ?>
-				<a class="client-logo-entry" href="<?= esc_url(get_the_permalink() . $categories_data->post_type . '/' . $categories_data->post_name); ?>">
-					<?php
-
-					if (has_post_thumbnail($categories_data->ID)) {
-
-
-						the_post_custom_thumbnail(
-							$categories_data->ID,
-							'featured-thumbnail',
-							[
-								'sizes' => '(max-width: 350px) 50px, 33px',
-								'class' => 'w-50 mx-auto rounded-circle categories-product',
-								'style' => 'border: 5px solid #941e29;  height: 9rem;',
-
-							]
-						);
-						echo '<h5 class="text-dark font-weight-bolder text-uppercase" style="padding:5% 0 5% 34.5%;">' . esc_html($categories_data->post_title) . '</h5>';
-					} else {
-					?>
-						<img src="https://via.placeholder.com/510x340" class="w-100" alt="Card image cap">
-					<?php
-
-					}
-					?>
-				</a>
-			<?php endforeach; ?>
-		<?php endif; ?>
-
+			<div class="text-center">
+				<div class="simple-article size-3 grey uppercase col-xs-b5">Kategori Produk</div>
+				<div class="h2">Terbaik dari yang terbaik</div>
+				<div class="title-underline center"><span></span></div>
+			</div>
 	</div>
-	<div class="empty-space col-xs-b35 col-md-b70"></div>
-	<div class="empty-space col-xs-b35 col-md-b70"></div>
+	<di v class="container">
+		<?php foreach ($product_category->get_posts() as $categories_data) : ?>
+			<a class="client-logo-entry" href="<?= esc_url(get_the_permalink() . $product_link->post_type . '/' . $product_link->post_name); ?>">
+				<?php
 
-	<div class="fixed-background" style="background-image: url(<?= ECOMMERCE_BUILD_IMG_URI; ?>/background-18.jpg);">
-		<div class="block-entry">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<?php foreach ($jumbotron->get_posts() as $url_thumbnails) : ?>
-							<?php
-							if (ecommerce_get_post_type('banner-image')->have_posts()) : ?>
-								<?php if (ecommerce_custom_thumbnail_title($url_thumbnails->ID) != '') : ?>
-									<div class="cell-view simple-banner-height big">
-										<div class="empty-space col-xs-b35"></div>
+				if (has_post_thumbnail($categories_data->ID)) {
 
-										<h2 class="h1 light"><?php ecommerce_custom_thumbnail_title($url_thumbnails->ID) ?></h2>
-										<div class="title-underline light"><span></span></div>
-										<div class="simple-article light size-4 col-xs-b20">
-											<?= ecommerce_custom_thumbnail($url_thumbnails->ID)->post_content; ?></div>
-										<a class="button size-2 style-1" href="aboutus">
-											<span class="button-wrapper">
-												<span class="icon"><img src="https://sr12herbalskincare.co.id/style/img/icon-1.png" alt=""></span>
-												<span class="text">learn more</span>
-											</span>
-										</a>
-										<div class="empty-space col-xs-b35"></div>
-									</div>
-								<?php endif; ?>
-							<?php endif; ?>
-						<?php endforeach; ?>
+
+					the_post_custom_thumbnail(
+						$categories_data->ID,
+						'featured-thumbnail',
+						[
+							'sizes' => '(max-width: 350px) 50px, 33px',
+							'class' => 'w-50 mx-auto rounded-circle categories-product',
+							'style' => 'border: 5px solid #941e29;  height: 9rem;',
+
+						]
+					);
+					echo '<h5 class="text-dark font-weight-bolder text-uppercase" style="padding:5% 0 5% 34.5%;">' . esc_html($categories_data->post_title) . '</h5>';
+				} else {
+				?>
+					<img src="https://via.placeholder.com/510x340" class="w-100" alt="Card image cap">
+				<?php
+
+				}
+				?>
+			</a>
+		<?php endforeach; ?>
+	<?php endif; ?>
+
+	</di>
+	<?php if ($jumbotron) : ?>
+		<div class="empty-space col-xs-b35 col-md-b70"></div>
+		<div class="empty-space col-xs-b35 col-md-b70"></div>
+		<div class="fixed-background" style="background-image: url(<?php echo get_the_post_thumbnail_url($jumbotron[0]->ID); ?>);">
+			<div class="block-entry">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<?php foreach ($jumbotron as $url_thumbnails) : ?>
+								<div class="cell-view simple-banner-height big">
+									<div class="empty-space col-xs-b35"></div>
+									<h2 class="h1 light"><?= get_the_post_thumbnail_caption($url_thumbnails->ID) ?></h2>
+									<div class="title-underline light"><span></span></div>
+									<div class="simple-article light size-4 col-xs-b20">
+										<?= ecommerce_custom_thumbnail($url_thumbnails->ID)->post_content; ?></div>
+									<?php $link_about = ecommerce_get_post_by_slug('page', 'about-us')->get_posts()[0]; ?>
+									<a class="button size-2 style-1" href="<?= esc_url(get_the_permalink() . $link_about->post_type . '/' . $link_about->post_name); ?>">
+										<span class="button-wrapper">
+											<span class="icon"><img src="https://sr12herbalskincare.co.id/style/img/icon-1.png" alt=""></span>
+											<span class="text">learn more</span>
+										</span>
+									</a>
+									<div class="empty-space col-xs-b35"></div>
+								</div>
+							<?php endforeach; ?>
+						</div>
 					</div>
-				</div>
-				<div class="row-background right hidden-xs">
-					<img src="https://sr12herbalskincare.co.id/gambar/profil/NUY.png" alt="">
+					<div class="row-background right hidden-xs">
+						<img src="https://sr12herbalskincare.co.id/gambar/profil/NUY.png" alt="">
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	<?php endif; ?>
 	<div class="empty-space col-xs-b35 col-md-b70"></div>
 	<div class="empty-space col-xs-b35 col-md-b70"></div>
 	<div class="container">
 		<div class="row">
-			<?php if (ecommerce_get_post_type('content-paragraph')->have_posts()) : ?>
+			<?php if (get_meta_key_like('filosofi_section1') != '') : ?>
 				<div class="col-sm-5">
 					<div class="simple-article size-3 grey uppercase col-xs-b5">Filosofi Kami</div>
 					<div class="h2">Yang kami yakini</div>
 					<div class="title-underline"><span></span></div>
-					<div class="simple-article size-4 grey"><?= ecommerce_get_meta_custom_field('filosofi_section1', 'content-paragraph'); ?>.</div>
+					<div class="simple-article size-4 grey"><?= get_meta_key_like('filosofi_section1')[0]->meta_value; ?>.</div>
 				</div>
 				<div class="col-sm-7">
 					<div class="simple-article size-3">
-						<p><?= ecommerce_get_meta_custom_field('filosofi_section2', 'content-paragraph'); ?></p>
+						<p><?= get_meta_key_like('filosofi_section2')[0]->meta_value; ?></p>
 					</div>
-				</div>
-				<div class="col-8">
-					<p style="opacity: 0.5;"><?= ecommerce_get_meta_custom_field('filosofi_section2', 'content-paragraph'); ?></p>
 				</div>
 			<?php endif; ?>
 		</div>
 	</div>
-	<div class="empty-space col-xs-b35 col-md-b70"></div>
-	<div class="empty-space col-xs-b35 col-md-b70"></div>
-	<div class="block-entry" style="background-image: url(<?= ECOMMERCE_BUILD_IMG_URI;   ?>/background-18b.jpg);">
-		<div class="container">
-			<div class="row">
-				<?php foreach ($jumbotron->get_posts() as $url_thumbnails) : ?>
-					<?php
-					if (ecommerce_get_post_type('banner-image')->have_posts()) : ?>
+	<?php if ($jumbotron2) : ?>
+		<div class="empty-space col-xs-b35 col-md-b70"></div>
+		<div class="empty-space col-xs-b35 col-md-b70"></div>
+		<div class="block-entry" style="background-image: url(<?= get_the_post_thumbnail_url($jumbotron2[0]->ID); ?>);">
+			<div class="container">
+				<div class="row">
+					<?php foreach ($jumbotron2 as $url_thumbnails) : ?>
 						<?php if (ecommerce_custom_thumbnail_title($url_thumbnails->ID) != '') : ?>
 							<div class="col-sm-6 col-sm-offset-6">
 								<div class="cell-view simple-banner-height">
 									<div class="empty-space col-xs-b35"></div>
 									<div class="simple-article light transparent size-5 uppercase col-xs-b5">
-										<h3><?php ecommerce_custom_thumbnail_title($url_thumbnails->ID); ?></h3>
+										<h3><?= get_the_post_thumbnail_caption($url_thumbnails->ID); ?></h3>
 									</div>
 									<div class="title-underline  light"><span></span></div>
 									<div class="simple-article light size-4 col-xs-b20"><?= ecommerce_custom_thumbnail($url_thumbnails->ID)->post_content; ?></div>
@@ -188,14 +181,14 @@ $jumbotron = ecommerce_banner('banner-image', 1);
 								</div>
 							</div>
 						<?php endif; ?>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</div>
-			<div class="row-background big left hidden-xs">
-				<img src="<?= ECOMMERCE_BUILD_IMG_URI; ?>/4444-min.png" alt="">
+					<?php endforeach; ?>
+				</div>
+				<div class="row-background big left hidden-xs">
+					<img src="<?= ECOMMERCE_BUILD_IMG_URI; ?>/4444-min.png" alt="">
+				</div>
 			</div>
 		</div>
-	</div>
+	<?php endif; ?>
 
 
 
@@ -233,59 +226,15 @@ $jumbotron = ecommerce_banner('banner-image', 1);
 					<div class="empty-space col-sm-b35"></div>
 					<div class="simple-article grey uppercase size-5 col-xs-b5"><span class="color">SPECIAL OFFERS</span> for subscribers</div>
 					<h3 class="h3 col-xs-b15">NEW OFFERS EVERY WEEK DISCOUNT SYSTEM BEST PRICES</h3>
-					<!-- <div class="simple-article size-3 col-xs-b25 col-sm-b50">Dapatkan penawaran khusus dan berbagai tips berguna untuk bisnis, langsung di email Anda</div>
-					<div class="single-line-form">
-						<input class="simple-input" type="text" value="" placeholder="Enter your email" name="email" id="email">
-						<div class="button size-2 style-3">
-							<span class="button-wrapper">
-								<span class="icon"><img src="https://sr12herbalskincare.co.id/gambar/subscribe/nuy_nunjukkk.png" alt=""></span>
-								<span class="text">submit</span>
-							</span>
-							<input type="button" id="newsletter" value="">
-						</div>
-						<script type="text/javascript">
-							(function($) {
 
-
-								$("#newsletter").click(function() {
-
-									var email = $("#email").val();
-									//alert(user);
-									if (email == '') {
-										alert('Maaf, Email tidak boleh kosong');
-										$("#email").focus();
-										return false();
-									}
-
-									$.ajax({
-										type: "POST",
-										url: "https://sr12herbalskincare.co.id/newsletter/insert",
-										data: "email=" + email,
-										beforeSend: function() {
-											// setting a timeout
-											$.LoadingOverlay("show");
-										},
-										success: function(msg) {
-											alert('Terima kasih, email sudah berhasil dikirim');
-											//document.location.href="administrator/page";
-											location.reload();
-										}
-									});
-
-								});
-
-							})(jQuery);
-						</script>
-					</div> -->
 					<div class="empty-space col-xs-b35"></div>
 				</div>
 			</div>
 		</div>
 		<div class="row-background left hidden-xs">
-			<img src="https://sr12herbalskincare.co.id/gambar/subscribe/nuy_nunjukkk.png" alt="">
+			<img src="	" alt="">
 		</div>
 	</div>
-
 
 	<?php edit_post_link(esc_html__('Edit', 'ecommerce'), '<button class="edit-link btn btn-danger btn-lg"><i class="fa-fw fas fa-cog mr-2"></i>', '</button>'); ?>
 	<!-- <footer class="entry-footer">
